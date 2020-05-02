@@ -2,11 +2,13 @@ package bookstore.backend.api;
 
 import bookstore.backend.datamodel.Book;
 import java.util.List;
+import javax.ejb.Remote;
 
 /**
  *
  * @author hhugohm
  */
+@Remote
 public interface BookstoreDAO {
   
     List<Book> getAllBooks();

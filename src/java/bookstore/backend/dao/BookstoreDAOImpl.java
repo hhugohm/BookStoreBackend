@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import bookstore.backend.annotations.SuppressLogging;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,6 +18,7 @@ import javax.persistence.TypedQuery;
  * @author hhugohm
  */
 @SuppressLogging
+@Stateless(name="BookstoreDAO")       //En tiempo de Runtime ya es un EJB -->No necesita guardar el estado
 public class BookstoreDAOImpl implements BookstoreDAO{
     
     private EntityManager jpa;
