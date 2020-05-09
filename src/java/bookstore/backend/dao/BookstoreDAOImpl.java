@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
@@ -20,31 +21,30 @@ import javax.persistence.TypedQuery;
 @SuppressLogging
 @Stateless(name="BookstoreDAO")       //En tiempo de Runtime ya es un EJB -->No necesita guardar el estado
 public class BookstoreDAOImpl implements BookstoreDAO{
-    
+
+    @PersistenceContext(name = "BookstorePU")
     private EntityManager jpa;
-    
+
     //private static final Logger logger= Logger.getLogger(BookstoreDAOImpl.class.getName());
     public BookstoreDAOImpl(){
-        this.jpa=this.getEntityManager();
+        //this.jpa=this.getEntityManager();
         System.out.println("####JPA#####: "+this.jpa);
     }
-    
-    
-    private EntityManager getEntityManager(){
+
+
+    /*private EntityManager getEntityManager(){
         EntityManagerFactory emf= Persistence.createEntityManagerFactory("BookstorePU");
         EntityManager em = emf.createEntityManager();
         return em;
-    }
+    }*/
 
-    
-    
     @SuppressLogging
     @Override
     public Book getBookById(int id) {
          //BookstoreLogger.log(Level.FINER,"Logging from getBookById() method");
-         
+
          Book book= this.jpa.find(Book.class, id);
-         
+
         return book;
     }
     @Override
@@ -53,7 +53,7 @@ public class BookstoreDAOImpl implements BookstoreDAO{
         TypedQuery<Book> query= this.jpa.createNamedQuery("getAllBooks", Book.class);
         return query.getResultList();
     }
-    
+
     @Override
     public List<Book> getBooksByTitle(String title) {
         TypedQuery<Book> query= this.jpa.createNamedQuery("getBooksByTitle", Book.class);
@@ -70,11 +70,11 @@ public class BookstoreDAOImpl implements BookstoreDAO{
 
     @Override
     public void insert(Book book) {
-        this.jpa.getTransaction().begin();
+       //this.jpa.getTransaction().begin();
         this.jpa.persist(book);
-        this.jpa.getTransaction().commit();
-        
-        
+        //this.jpa.getTransaction().commit();
+
+
     }
 
     @Override
@@ -82,20 +82,20 @@ public class BookstoreDAOImpl implements BookstoreDAO{
         this.jpa.getTransaction().begin();
         this.jpa.merge(book);
         this.jpa.getTransaction().commit();
-       
+
     }
 
     @Override
     public void delete(Book book) {
         this.jpa.getTransaction().begin();
-        
+
         this.jpa.remove(book);
         this.jpa.getTransaction().commit();
     }
-    
 
 
-    
-    
-    
+
+
+
+
 }
