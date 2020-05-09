@@ -1,6 +1,7 @@
 package bookstore.backend.util;
 
 import bookstore.backend.api.BookstoreDAO;
+import bookstore.backend.api.ShoppingCartService;
 import bookstore.backend.dao.BookstoreDAOImpl;
 import bookstore.backend.datamodel.Book;
 import bookstore.backend.datamodel.enums.Availability;
@@ -8,6 +9,8 @@ import bookstore.backend.datamodel.enums.BookFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 
 
 /**
@@ -19,14 +22,16 @@ public class Test {
     
     public static void main(String args[]){
         
-        getBookById(1);
-        getAllBooks();
-        getBooksByTitle("myth");
-        getBooksByKeyword("camus");
+       // getBookById(1);
+        //getAllBooks();
+        //getBooksByTitle("myth");
+        //getBooksByKeyword("camus");
         //insert(buildBook());
         //update(11);
-        delete(11);
+        //delete(11);
        //Book book = new Book().setTitle("MI LIBRO");
+       
+       getShoppingCartService();
         
     }
     
@@ -102,4 +107,26 @@ public class Test {
          book.setStockQuantity(10);
         return book;
     }
+    
+    private static void add(){
+        
+        
+    }
+    
+    private  static ShoppingCartService getShoppingCartService(){
+        ShoppingCartService shoppingCartService = null;
+        
+        try{
+            Context ctx = new InitialContext();
+            shoppingCartService= (ShoppingCartService)ctx.lookup("java:global/BookstoreBackend/ShoppingCartIService");
+            System.out.println("###### ShoppingCartService: "+shoppingCartService);
+           
+        
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return shoppingCartService;
+    } 
+    
 }
