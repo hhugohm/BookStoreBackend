@@ -26,6 +26,7 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name="BOOKS")
+//Metadata 
 @NamedQueries({
     @NamedQuery(name="getAllBooks" ,query = "select b from Book b"),
     @NamedQuery(name="getBooksByTitle" ,query = "select b from Book b where lower(b.title) like lower(:pTitle)"),
