@@ -9,11 +9,11 @@ import javax.ejb.Remote;
  * @author hhugohm
  */
 @Remote
-public interface BookstoreShoppingCart {
+public interface ShoppingCartService {
     
-    void addBook(Book book);
-    void removeBook(Book book);
-    List<Book> getBooksInCart();
+    void add(Book book);
+    void remove(Book book);
+    List<Book> getItems();
     void checkout();
     
 }

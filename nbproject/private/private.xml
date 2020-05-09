@@ -4,13 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/hhugohm/NetBeansProjects/BookstoreBackend/src/java/bookstore/backend/api/BookstoreDAO.java</file>
+            <file>file:/Users/hhugohm/NetBeansProjects/BookstoreBackend/src/java/bookstore/backend/api/BookstoreShoppingCart.java</file>
+            <file>file:/Users/hhugohm/NetBeansProjects/BookstoreBackend/src/java/bookstore/backend/service/BookstoreShoppingCartImpl.java</file>
             <file>file:/Users/hhugohm/NetBeansProjects/BookstoreBackend/src/java/bookstore/backend/datamodel/enums/converters/AvailabilityConverter.java</file>
             <file>file:/Users/hhugohm/NetBeansProjects/BookstoreBackend/src/conf/MANIFEST.MF</file>
             <file>file:/Users/hhugohm/NetBeansProjects/BookstoreBackend/src/conf/persistence.xml</file>
             <file>file:/Users/hhugohm/NetBeansProjects/BookstoreBackend/src/java/bookstore/backend/dao/BookstoreDAOImpl.java</file>
             <file>file:/Users/hhugohm/NetBeansProjects/BookstoreBackend/src/java/bookstore/backend/datamodel/Book.java</file>
             <file>file:/Users/hhugohm/NetBeansProjects/BookstoreBackend/src/java/bookstore/backend/util/Test.java</file>
-            <file>file:/Users/hhugohm/NetBeansProjects/BookstoreBackend/src/conf/ejb-jar.xml</file>
         </group>
     </open-files>
 </project-private>

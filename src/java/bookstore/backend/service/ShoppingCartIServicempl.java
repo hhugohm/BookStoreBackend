@@ -1,32 +1,32 @@
 package bookstore.backend.service;
 
-import bookstore.backend.api.BookstoreShoppingCart;
 import bookstore.backend.datamodel.Book;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateful;
+import bookstore.backend.api.ShoppingCartService;
 
 /**
  *
  * @author hhugohm
  */
-@Stateful(name="BookstoreShoppingCart")    //en tiempo de runtime ya es una EJB --> Guarda el estado del carrito de compras
-public class BookstoreShoppingCartImpl implements BookstoreShoppingCart{
+@Stateful(name="ShoppingCartIService")    //en tiempo de runtime ya es una EJB --> Guarda el estado del carrito de compras
+public class ShoppingCartIServicempl implements ShoppingCartService{
     
     private List<Book> books = new ArrayList<>();
 
     @Override
-    public void addBook(Book book) {
+    public void add(Book book) {
        
     }
 
     @Override
-    public void removeBook(Book book) {
+    public void remove(Book book) {
         
     }
 
     @Override
-    public List<Book> getBooksInCart() {
+    public List<Book> getItems() {
       return null;
     }
 
