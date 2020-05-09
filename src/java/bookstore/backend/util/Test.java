@@ -22,7 +22,7 @@ public class Test {
     
     public static void main(String args[]){
         
-       // getBookById(1);
+        getBookById(1);
         //getAllBooks();
         //getBooksByTitle("myth");
         //getBooksByKeyword("camus");
@@ -30,8 +30,7 @@ public class Test {
         //update(11);
         //delete(11);
        //Book book = new Book().setTitle("MI LIBRO");
-       
-       getShoppingCartService();
+
         
     }
     
@@ -108,25 +107,6 @@ public class Test {
         return book;
     }
     
-    private static void add(){
-        
-        
-    }
     
-    private  static ShoppingCartService getShoppingCartService(){
-        ShoppingCartService shoppingCartService = null;
-        
-        try{
-            Context ctx = new InitialContext();
-            shoppingCartService= (ShoppingCartService)ctx.lookup("java:global/BookstoreBackend/ShoppingCartIService");
-            System.out.println("###### ShoppingCartService: "+shoppingCartService);
-           
-        
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        return shoppingCartService;
-    } 
     
 }

@@ -19,6 +19,7 @@ public class ShoppingCartIServicempl implements ShoppingCartService{
 
     @Override
     public void add(Book book) {
+       System.out.println("#### this: " +this);
        this.items.put(book.getId(), book);
     }
 
