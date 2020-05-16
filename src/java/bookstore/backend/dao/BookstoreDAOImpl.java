@@ -13,6 +13,7 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.LockModeType;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -26,14 +27,14 @@ import javax.transaction.UserTransaction;
  */
 @SuppressLogging
 @Stateless(name="BookstoreDAO")//En tiempo de Runtime ya es un EJB -->No necesita guardar el estado
-@TransactionManagement(TransactionManagementType.BEAN)
+@TransactionManagement(TransactionManagementType.BEAN) // uso manual de la transacional - demarcado munualmente
 public class BookstoreDAOImpl implements BookstoreDAO{
 
     @PersistenceContext(name = "BookstorePU")
     private EntityManager jpa;
 
     @Resource
-    private UserTransaction jta;
+    private UserTransaction jta; //demarcacion 
     
     //private static final Logger logger= Logger.getLogger(BookstoreDAOImpl.class.getName());
     public BookstoreDAOImpl(){
@@ -50,8 +51,28 @@ public class BookstoreDAOImpl implements BookstoreDAO{
     @Override
     public Book getBookById(int id) {
          //BookstoreLogger.log(Level.FINER,"Logging from getBookById() method");
+         Book book=null;
+         //Book book= this.jpa.find(Book.class, id);
+         try{
+             this.jta.begin();
+             book= this.jpa.find(Book.class, id);
+             this.jpa.lock(book, LockModeType.PESSIMISTIC_READ);
+             
+             try{
+            System.out.println("###: Thread: " + Thread.currentThread().getName()+" working with book....");
+                //Thread.currentThread().sleep(25000);
+            System.out.println("###: Thread: " + Thread.currentThread().getName()+ " finished....");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+             
+             this.jta.commit();
+             
+            }catch(Exception e){
+                e.printStackTrace();
+            }
 
-         Book book= this.jpa.find(Book.class, id);
+         
 
         return book;
     }
@@ -80,6 +101,8 @@ public class BookstoreDAOImpl implements BookstoreDAO{
     public void insert(Book book) {
         try {
             //this.jpa.getTransaction().begin();
+            System.out.println(book);
+            System.out.println(this.jta);
             this.jta.begin();
             this.jpa.persist(book);
             this.jta.commit();
@@ -93,6 +116,7 @@ public class BookstoreDAOImpl implements BookstoreDAO{
     public void update(Book book) {
         //this.jpa.getTransaction().begin();
         try{
+              System.out.println(this.jta);
             this.jta.begin();
             this.jpa.merge(book);
             this.jta.commit();
@@ -107,7 +131,8 @@ public class BookstoreDAOImpl implements BookstoreDAO{
        // this.jpa.getTransaction().begin();
        try{
             this.jta.begin();
-            this.jpa.remove(book);
+            Book bookDB= this.getBookById(book.getId());
+            this.jpa.remove(bookDB);
             this.jta.commit();
        // this.jpa.getTransaction().commit();
        }catch (Exception e) {

@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.persistence.Version;
 
 
 /**
@@ -72,6 +73,10 @@ public class Book implements Serializable{
     
     
     private byte[] image;
+    
+    @Version
+    private int version;
+    
 
     public int getId() {
         return id;
@@ -177,6 +182,14 @@ public class Book implements Serializable{
         this.image = image;
     }
 
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
+    
     @Override
     public String toString() {
         return "Book{" + "id=" + id + ", title=" + title + ", autho="+ author+ 
