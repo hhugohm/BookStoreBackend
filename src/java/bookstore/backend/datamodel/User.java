@@ -1,44 +1,42 @@
-
 package bookstore.backend.datamodel;
 
 import bookstore.backend.datamodel.enums.UserType;
+import bookstore.backend.datamodel.enums.converters.UserTypeConverter;
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  *
  * @author hhugohm
  */
-
-
 @Entity
-@Table(name="USERS")
-@NamedQuery(name = "getUser", 
-            query = "SELECT u FROM User u WHERE u.username = :pUsername and u.password = :pPassword")
-public class User implements Serializable{
-    
+@Table(name = "USERS")
+@NamedQuery(name = "getUser",
+        query = "SELECT u FROM User u WHERE u.username = :pUsername and u.password = :pPassword")
+public class User implements Serializable {
+
     @Id
-    @Column(name="ID")
-    @GeneratedValue(strategy =GenerationType.IDENTITY)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    
+
     private String name;
-    
+
     private String email;
-    
+
     private String username;
-    
+
     private String password;
-    
-    @Transient
+
+    @Convert(converter = UserTypeConverter.class)
+    @Column(name = "TYPE")
     private UserType userType;
 
     public int getId() {
@@ -93,5 +91,5 @@ public class User implements Serializable{
     public String toString() {
         return "User{" + "id=" + id + ", name=" + name + ", email=" + email + ", username=" + username + ", password=" + password + ", userType=" + userType + '}';
     }
-       
+
 }
