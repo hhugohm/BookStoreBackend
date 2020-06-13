@@ -7,5 +7,10 @@ package bookstore.backend.datamodel.enums;
 public enum Availability {
     IN_STOCK,
     PRESALE,
-    NOT_AVAILABLE
+    NOT_AVAILABLE;
+    
+    
+    public String getValue(){
+        return this.toString();
+    }
 }

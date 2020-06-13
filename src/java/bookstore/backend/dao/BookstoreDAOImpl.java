@@ -50,9 +50,12 @@ public class BookstoreDAOImpl implements BookstoreDAO{
     @SuppressLogging
     @Override
     public Book getBookById(int id) {
-         //BookstoreLogger.log(Level.FINER,"Logging from getBookById() method");
-         Book book=null;
-         //Book book= this.jpa.find(Book.class, id);
+         Book book= this.jpa.find(Book.class, id);
+         
+          return book;
+                  
+          
+         /*
          try{
              this.jta.begin();
              book= this.jpa.find(Book.class, id);
@@ -60,7 +63,6 @@ public class BookstoreDAOImpl implements BookstoreDAO{
              
              try{
             System.out.println("###: Thread: " + Thread.currentThread().getName()+" working with book....");
-                //Thread.currentThread().sleep(25000);
             System.out.println("###: Thread: " + Thread.currentThread().getName()+ " finished....");
             }catch(Exception e){
                 e.printStackTrace();
@@ -70,11 +72,11 @@ public class BookstoreDAOImpl implements BookstoreDAO{
              
             }catch(Exception e){
                 e.printStackTrace();
+          
             }
-
+          return book;
+            */
          
-
-        return book;
     }
     @Override
     public List<Book> getAllBooks() {

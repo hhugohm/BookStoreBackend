@@ -16,10 +16,11 @@ public enum BookFormat {
     private BookFormat(String description){
         this.description=description;
     }
-
-    @Override
-    public String toString() {
-        return this.description;
+    
+    public String getValue(){
+        return this.toString();
     }
+
+    
        
 }
